@@ -1,0 +1,976 @@
+[
+    {
+        "id": "e78dc84e42db0592",
+        "type": "tab",
+        "label": "Holiday Monitor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f94f93f85c15c08e",
+        "type": "group",
+        "z": "e78dc84e42db0592",
+        "name": "",
+        "style": {
+            "fill": "#e3f3d3",
+            "label": true
+        },
+        "nodes": [
+            "f39b897cddc79f3f",
+            "7b83809c8208abb1",
+            "aa5924c521274987",
+            "a9b1c63164f5f7b4"
+        ],
+        "x": 114,
+        "y": 859,
+        "w": 492,
+        "h": 202
+    },
+    {
+        "id": "237e3b59ac3059c1",
+        "type": "group",
+        "z": "e78dc84e42db0592",
+        "name": "",
+        "style": {
+            "fill": "#bfdbef",
+            "label": true
+        },
+        "nodes": [
+            "2c5fe919b95d62a3",
+            "60345a9504a5dc59",
+            "fffb9195ee23b432",
+            "a740c57dd935772a"
+        ],
+        "x": 854,
+        "y": 399,
+        "w": 492,
+        "h": 182
+    },
+    {
+        "id": "266524b34efe73f6",
+        "type": "group",
+        "z": "e78dc84e42db0592",
+        "name": "",
+        "style": {
+            "fill": "#e3f3d3",
+            "label": true
+        },
+        "nodes": [
+            "2ca0ef21853299ae",
+            "e456fdf6adec0b3c",
+            "31e32ffb97b7a8d7",
+            "a1b0253b6c564cde"
+        ],
+        "x": 114,
+        "y": 79,
+        "w": 592,
+        "h": 182
+    },
+    {
+        "id": "1692c18dd1c22cbb",
+        "type": "group",
+        "z": "e78dc84e42db0592",
+        "name": "",
+        "style": {
+            "fill": "#e3f3d3",
+            "label": true
+        },
+        "nodes": [
+            "e2f293c9bccd3e75",
+            "6bd21d4ed56fb1b9",
+            "ab7e2acd44576701",
+            "c1751d6cf578612a",
+            "650d37abbfa5d77e",
+            "edb6c38ceb1d1319",
+            "dc19f4733530f2b0",
+            "bafd85e580661b15",
+            "ac146af9dcc0cd72",
+            "fea8eff91a94e614",
+            "7c4d5b2a08e4a5e2",
+            "6f954b1fb49757f6",
+            "0c68401b1c0c6ab4",
+            "2cc9ece59350a0be",
+            "1163bbf7da983352"
+        ],
+        "x": 114,
+        "y": 339,
+        "w": 632,
+        "h": 442
+    },
+    {
+        "id": "f39b897cddc79f3f",
+        "type": "digital-in",
+        "z": "e78dc84e42db0592",
+        "g": "f94f93f85c15c08e",
+        "host": "localhost",
+        "port": "1883",
+        "wrappa_name": "Wrappa4",
+        "name": "Water Sensor",
+        "mode": "StateChangeAlert",
+        "pin": "D5",
+        "debounce_period": "200",
+        "alt_high_rising_msg": "YES",
+        "alt_low_falling_msg": "NO",
+        "x": 220,
+        "y": 940,
+        "wires": [
+            [
+                "7b83809c8208abb1",
+                "aa5924c521274987"
+            ]
+        ]
+    },
+    {
+        "id": "7b83809c8208abb1",
+        "type": "ui_led",
+        "z": "e78dc84e42db0592",
+        "g": "f94f93f85c15c08e",
+        "order": 1,
+        "group": "2172dfd58e6703ff",
+        "width": 0,
+        "height": 0,
+        "label": "<font color=\"SkyBlue\"> Water Detected?  {{msg.payload}}",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "NO",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "YES",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "W-LED",
+        "x": 500,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "2c5fe919b95d62a3",
+        "type": "telegram sender",
+        "z": "e78dc84e42db0592",
+        "g": "237e3b59ac3059c1",
+        "name": "",
+        "bot": "198b7da7967fef99",
+        "haserroroutput": true,
+        "outputs": 2,
+        "x": 1240,
+        "y": 540,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "60345a9504a5dc59",
+        "type": "function",
+        "z": "e78dc84e42db0592",
+        "g": "237e3b59ac3059c1",
+        "name": "Telegram Chat-ID",
+        "func": "// This function just sends any input message to the Telegram node\n//You must fist obtain your own Telegram ChatID and then \n//insert your \"chatid\" in the line below.\nchatid = \"5416672964\";\nmessage = msg.payload;\nmsg.payload = {\"chatId\": chatid,\"type\": \"message\",\"content\": message};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 540,
+        "wires": [
+            [
+                "2c5fe919b95d62a3"
+            ]
+        ]
+    },
+    {
+        "id": "aa5924c521274987",
+        "type": "change",
+        "z": "e78dc84e42db0592",
+        "g": "f94f93f85c15c08e",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "YES",
+                "fromt": "str",
+                "to": "Warning Water Leak Detected",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "NO",
+                "fromt": "str",
+                "to": "Water Sensor OK",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 1020,
+        "wires": [
+            [
+                "60345a9504a5dc59"
+            ]
+        ]
+    },
+    {
+        "id": "fffb9195ee23b432",
+        "type": "comment",
+        "z": "e78dc84e42db0592",
+        "g": "237e3b59ac3059c1",
+        "name": "Telegram Alert Message",
+        "info": "Change the ChatID on the \"Telegram Chat-ID\" function node to your own Telegram ID.",
+        "x": 980,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d9120ad317b280fc",
+        "type": "comment",
+        "z": "e78dc84e42db0592",
+        "name": "Power, Gas, Fire, Water Monitor.   ",
+        "info": "",
+        "x": 250,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "8059d259f588ef34",
+        "type": "comment",
+        "z": "e78dc84e42db0592",
+        "name": "NOTE: Click and read the comments in each Node Group Title for instructions on what values require changes",
+        "info": "",
+        "x": 830,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a9b1c63164f5f7b4",
+        "type": "comment",
+        "z": "e78dc84e42db0592",
+        "g": "f94f93f85c15c08e",
+        "name": "Water Sensor",
+        "info": "Make sure to change the \"Wrappa Name\" on the \"Water Sensor\" Digital Input node to the one that you gave to your Wrappa.",
+        "x": 210,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "a1b0253b6c564cde",
+        "type": "function",
+        "z": "e78dc84e42db0592",
+        "g": "266524b34efe73f6",
+        "name": "Process Heartbeats",
+        "func": "// Power failure detection based on the Wrappa sending the Hub a 'Connected' heartbeat message every 5 seconds \n// If the connection between the Wrappa and Hub is lost because the Wrappa loses power, the Wrappa Mgr node will \n// output a 'Disconnected' message every 20 seconds\n\nconst persistance = 2;                                  // The number of consecutive 'Disconnected' messages received before raising an alert. Increase this value for a longer power failure duration before raining an alert\nlet count = context.get(\"disconnect_msg_count\") || 0;   // Retreive the current count of consecutive 'Disconnected' messages\nlet msg1 = {payload: \"ON\"};                             // Message object for the top output of this function node\nlet msg2 = {};                                          // Message object for the bottom output of this function node\nmsg2 = null;\n\nswitch(msg.payload){\n    case \"Connected\":\n        // If the power was OFF, send a Telegram message indicating it's back on\n        if (count >= persistance) {\n            msg2 = {payload: \"Power is back ON\"};\n        }\n        count = 0;     // reset the count of consecutive disconnected messages\n    break;\n        \n    case \"Disconnected\":\n        count++;    // Increment the count of consecutive disconnected messages\n        // If the count equals the persistance value send a Telegram alert message\n        if (count == persistance) {\n            msg2 = {payload: \"Power Outage Alarm\"};\n        }\n        // If the count is equal to or exceeds the persistance value, indicate the power is OFF on the dashboard\n        if (count >= persistance) {\n            msg1 = {payload:\"OFF\"};\n        }\n    break;\n}\n// Save the latest count of consecutive disconnected message value to the node's context object and send appropriate messages to this node's outputs\ncontext.set(\"disconnect_msg_count\", count);  \nreturn [msg1,msg2];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "e456fdf6adec0b3c"
+            ],
+            [
+                "60345a9504a5dc59"
+            ]
+        ],
+        "outputLabels": [
+            "msg1",
+            ""
+        ]
+    },
+    {
+        "id": "2ca0ef21853299ae",
+        "type": "wrappa-mgr",
+        "z": "e78dc84e42db0592",
+        "g": "266524b34efe73f6",
+        "host": "localhost",
+        "port": "1883",
+        "wrappa_name": "Wrappa4",
+        "name": "wrappa manager",
+        "debug_level": "1",
+        "pwm_frequency": "",
+        "heartbeats": "on",
+        "i2c_bus_enabled": "",
+        "SCL_terminal": "",
+        "SDA_terminal": "",
+        "i2c_bus_clk_speed": "",
+        "i2c_bus_clk_stretch_limit": "",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "a1b0253b6c564cde"
+            ]
+        ]
+    },
+    {
+        "id": "e456fdf6adec0b3c",
+        "type": "ui_led",
+        "z": "e78dc84e42db0592",
+        "g": "266524b34efe73f6",
+        "order": 1,
+        "group": "57891316f247d415",
+        "width": 0,
+        "height": 0,
+        "label": "<strong><font color=\"Yellow\">  Power is {{msg.payload}}",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "ON",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "OFF",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "P-LED",
+        "x": 630,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "31e32ffb97b7a8d7",
+        "type": "comment",
+        "z": "e78dc84e42db0592",
+        "g": "266524b34efe73f6",
+        "name": "Home Power Monitor",
+        "info": "Make sure to change the \"Wrappa Name\" on the \"red\" management node to the one that you gave to your Wrappa.",
+        "x": 240,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "a740c57dd935772a",
+        "type": "ui_button",
+        "z": "e78dc84e42db0592",
+        "g": "237e3b59ac3059c1",
+        "name": "",
+        "group": "3ddf72974ccc502f",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Send Test Alert Message",
+        "tooltip": "CLICK HERE",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Test Message from Wrapit Hub",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 990,
+        "y": 480,
+        "wires": [
+            [
+                "60345a9504a5dc59"
+            ]
+        ]
+    },
+    {
+        "id": "e2f293c9bccd3e75",
+        "type": "ui_chart",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "Smoke Plot",
+        "group": "77361e20002db208",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "label": "Gas/Smoke Level History",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1023",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": true,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 490,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6bd21d4ed56fb1b9",
+        "type": "ui_switch",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "Activate Sensor",
+        "label": "<font color=\"Yellow\"> Activate Sensor",
+        "tooltip": "",
+        "group": "77361e20002db208",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "SetPinState",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "HIGH",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "LOW",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 220,
+        "y": 500,
+        "wires": [
+            [
+                "ab7e2acd44576701",
+                "bafd85e580661b15"
+            ]
+        ]
+    },
+    {
+        "id": "ab7e2acd44576701",
+        "type": "digital-out",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "host": "localhost",
+        "port": "1883",
+        "wrappa_name": "Wrappa4",
+        "name": "Relay",
+        "pin": "D6",
+        "initial_state": "LOW",
+        "alt_high_msg": "",
+        "alt_low_msg": "",
+        "x": 470,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1751d6cf578612a",
+        "type": "ui_led",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "order": 2,
+        "group": "77361e20002db208",
+        "width": 0,
+        "height": 0,
+        "label": "<font color=\"Yellow\"> Sensor is {{msg.payload}}",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "ACTIVE",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "INACTIVE",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "LED",
+        "x": 630,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "650d37abbfa5d77e",
+        "type": "ui_gauge",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "",
+        "group": "77361e20002db208",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Current Gas/Smoke Level",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1023",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "300",
+        "seg2": "500",
+        "diff": false,
+        "className": "",
+        "x": 530,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "edb6c38ceb1d1319",
+        "type": "analog-in",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "host": "localhost",
+        "port": "1883",
+        "wrappa_name": "Wrappa4",
+        "name": "Gas/Smoke Monitor",
+        "mode": "ContinuousAndAlert",
+        "sample_rate": "5",
+        "time_unit": "seconds",
+        "scaling_factor": "",
+        "moving_avg_window_size": "",
+        "rising_alert_value": "",
+        "falling_alert_value": "",
+        "suppress_repeat_alerts": false,
+        "x": 240,
+        "y": 720,
+        "wires": [
+            [
+                "e2f293c9bccd3e75",
+                "650d37abbfa5d77e",
+                "0c68401b1c0c6ab4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dc19f4733530f2b0",
+        "type": "comment",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "Gas/Smoke Monitor",
+        "info": "Flow Block settings adjustments required:\n\n1. Change the Wrappa Name to the one you set.\n2. You may need to adjust thresholds on the \"Status Thresholds\" node to reflect the steady state condition of your sensor. There are threee thresholds and each determines the message that gets sent to one of the threee outputs.",
+        "x": 230,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bafd85e580661b15",
+        "type": "change",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "IN/ACTIVE",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "HIGH",
+                "fromt": "str",
+                "to": "ACTIVE",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "LOW",
+                "fromt": "str",
+                "to": "INACTIVE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "c1751d6cf578612a"
+            ]
+        ]
+    },
+    {
+        "id": "ac146af9dcc0cd72",
+        "type": "ui_led",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "order": 3,
+        "group": "77361e20002db208",
+        "width": 0,
+        "height": 0,
+        "label": "<font color=\"Lime\"> Gas/Smoke Detected?    {{msg.payload}}",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "NO",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "YES",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "G-LED",
+        "x": 650,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "fea8eff91a94e614",
+        "type": "change",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "OOA",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OOA",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 620,
+        "wires": [
+            [
+                "ac146af9dcc0cd72",
+                "2cc9ece59350a0be"
+            ]
+        ]
+    },
+    {
+        "id": "7c4d5b2a08e4a5e2",
+        "type": "change",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "YES",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "YES",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 540,
+        "wires": [
+            [
+                "ac146af9dcc0cd72",
+                "2cc9ece59350a0be"
+            ]
+        ]
+    },
+    {
+        "id": "6f954b1fb49757f6",
+        "type": "change",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "NO",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "NO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 580,
+        "wires": [
+            [
+                "ac146af9dcc0cd72",
+                "2cc9ece59350a0be"
+            ]
+        ]
+    },
+    {
+        "id": "0c68401b1c0c6ab4",
+        "type": "switch",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "Set Thresholds",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "400",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "21",
+                "vt": "num",
+                "v2": "399",
+                "v2t": "num"
+            },
+            {
+                "t": "lte",
+                "v": "20",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 220,
+        "y": 580,
+        "wires": [
+            [
+                "7c4d5b2a08e4a5e2"
+            ],
+            [
+                "6f954b1fb49757f6"
+            ],
+            [
+                "fea8eff91a94e614"
+            ]
+        ]
+    },
+    {
+        "id": "2cc9ece59350a0be",
+        "type": "rbe",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 630,
+        "y": 480,
+        "wires": [
+            [
+                "1163bbf7da983352"
+            ]
+        ]
+    },
+    {
+        "id": "1163bbf7da983352",
+        "type": "change",
+        "z": "e78dc84e42db0592",
+        "g": "1692c18dd1c22cbb",
+        "name": "Warnings",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "YES",
+                "fromt": "str",
+                "to": "Warning Gas or Smoke Detected",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "NO",
+                "fromt": "str",
+                "to": "Gas/Smoke no longer detetced",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "OOA",
+                "fromt": "str",
+                "to": "Warning Smoke Sensor Malfunction or Switched OFF",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 540,
+        "wires": [
+            [
+                "60345a9504a5dc59"
+            ]
+        ]
+    },
+    {
+        "id": "4e80a110bbe969a3",
+        "type": "ui_spacer",
+        "z": "e78dc84e42db0592",
+        "name": "spacer",
+        "group": "04d13ab693704bbc",
+        "order": 4,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "c0799030677077eb",
+        "type": "ui_spacer",
+        "z": "e78dc84e42db0592",
+        "name": "spacer",
+        "group": "04d13ab693704bbc",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2172dfd58e6703ff",
+        "type": "ui_group",
+        "name": "Water Leak Monitor",
+        "tab": "99d45c2445cb5dd2",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "198b7da7967fef99",
+        "type": "telegram bot",
+        "botname": "Wrapit",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "57891316f247d415",
+        "type": "ui_group",
+        "name": "House Power Monitor",
+        "tab": "99d45c2445cb5dd2",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3ddf72974ccc502f",
+        "type": "ui_group",
+        "name": "Test Alert Messages",
+        "tab": "99d45c2445cb5dd2",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "77361e20002db208",
+        "type": "ui_group",
+        "name": "Gas & Smoke Monitor",
+        "tab": "99d45c2445cb5dd2",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "04d13ab693704bbc",
+        "type": "ui_group",
+        "name": "Smart Security Light",
+        "tab": "99d45c2445cb5dd2",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "99d45c2445cb5dd2",
+        "type": "ui_tab",
+        "name": "Home Monitor",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
